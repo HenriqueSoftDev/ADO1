@@ -25,6 +25,11 @@ public class Ado1 {
                 break;
             case 3:
                 BuscaSenha(lista);
+                break;
+            case 4:
+                ClassificarNome(lista);
+                break;
+
         }
 
 
@@ -92,9 +97,23 @@ public class Ado1 {
 
     }
 
+    public static void ClassificarNome(Usuario[] lista) {
+        String tempNome;
+        for (int j = 0; j < lista.length; j++) {
+            for (int i = j + 1; i < lista.length; i++) {
+                if (lista[i].getNome().compareTo(lista[j].getNome()) < 0) {
+
+                    tempNome = lista[j].getNome();
+                    lista[j].setNome(lista[i].getNome());
+                    lista[i].setNome(tempNome);
+                }
+            }
+            JOptionPane.showMessageDialog(null, lista[j].getNome());
+        }
+    }
     public static int Menu(){
 
-        String[] opcoes = {"Imprimir", "Buscar Nome", "Buscar Senha"};
+        String[] opcoes = {"Imprimir", "Buscar Nome", "Buscar Senha", "Classificar por Nome"};
 
         int escolha = JOptionPane.showOptionDialog(null,
                 "Escolha uma opção:",
