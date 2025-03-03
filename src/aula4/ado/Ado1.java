@@ -6,33 +6,61 @@ public class Ado1 {
 
     public static void main(String[] args) {
 
-        Usuario[] lista = new Usuario[3];
+        int finaliza = 1;
+        do {
+            Usuario[] lista = new Usuario[3];
 
-        JOptionPane.showInternalMessageDialog(null, "Bem vindo!!");
+            JOptionPane.showInternalMessageDialog(null, "Bem vindo!!");
 
-        Leitura(lista);
+            Leitura(lista);
 
-        int escolha = Menu();
+            int escolha = Menu();
 
 
-        switch(escolha){
+            switch (escolha) {
 
-            case 1:
-                Imprimir(lista);
-                break;
-            case 2:
-                BuscaNome(lista);
-                break;
-            case 3:
-                BuscaSenha(lista);
-                break;
-            case 4:
-                ClassificarNome(lista);
-                break;
+                case 1:
+                    Imprimir(lista);
+                    break;
+                case 2:
+                    BuscaNome(lista);
+                    break;
+                case 3:
+                    BuscaSenha(lista);
+                    break;
+                case 4:
+                    ClassificarNome(lista);
+                    break;
+                case 5:
+                    ClassificarSenha(lista);
+                    break;
+                case 6:
+                    JOptionPane.showMessageDialog(null, ("OBRIGADO POR USAR O SISTEMA!"));
+                    break;
+                default:
+                    JOptionPane.showMessageDialog(null, ("OBRIGADO POR USAR O SISTEMA!"));
+            }
+
+            if (escolha != 6){
+                String[] opcoes = {"Reiniciar", "Finalizar"};
+
+                finaliza = JOptionPane.showOptionDialog(null,
+                        "Escolha uma opção:",
+                        "Aviso",
+                        JOptionPane.DEFAULT_OPTION,
+                        JOptionPane.INFORMATION_MESSAGE,
+                        null,
+                        opcoes,
+                        opcoes[0]);
+
+                if (finaliza == 1){
+                    JOptionPane.showMessageDialog(null, ("OBRIGADO POR USAR O SISTEMA!"));
+                }
+            }
 
         }
 
-
+        while (finaliza == 0);
     }
 
     public static Usuario[] Leitura(Usuario[] lista) {
@@ -111,9 +139,25 @@ public class Ado1 {
             JOptionPane.showMessageDialog(null, lista[j].getNome());
         }
     }
+
+    public static void ClassificarSenha(Usuario[] lista) {
+        int tempSenha;
+        for (int j = 0; j < lista.length; j++) {
+            for (int i = j + 1; i < lista.length; i++) {
+                if (Integer.toString(lista[i].senha).compareTo(Integer.toString(lista[j].senha)) < 0) {
+
+                    tempSenha = lista[j].senha;
+                    lista[j].senha = lista[i].senha;
+                    lista[i].senha = tempSenha;
+                }
+            }
+            JOptionPane.showMessageDialog(null,lista[j].getSenha());
+        }
+    }
+
     public static int Menu(){
 
-        String[] opcoes = {"Imprimir", "Buscar Nome", "Buscar Senha", "Classificar por Nome"};
+        String[] opcoes = {"Imprimir", "Buscar Nome", "Buscar Senha", "Classificar por Nome", "Classificar por Senha", "Finalizar"};
 
         int escolha = JOptionPane.showOptionDialog(null,
                 "Escolha uma opção:",
